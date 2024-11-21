@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat Simulator</title>
+    {% load static %}
+</head>
+<body>
+    <h1>Добро пожаловать в симулятор кота!</h1>
+    <img src="{% static 'cat/neutral_cat.jpg' %}" alt="Кот">
+    <form method="POST">
+        {% csrf_token %}
+        <label>Введите имя кота:</label>
+        <input type="text" name="name" required>
+        <button type="submit">Создать</button>
+    </form>
+</body>
+</html>

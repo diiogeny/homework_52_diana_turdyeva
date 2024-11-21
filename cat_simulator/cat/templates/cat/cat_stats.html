@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat Stats</title>
+    {% load static %}
+</head>
+<body>
+    <h1>Информация о коте</h1>
+    {% if cat.happiness > 80 %}
+        <img src="{% static 'cat/happy_cat.jpg' %}" alt="Счастливый кот">
+    {% elif cat.happiness < 30 %}
+        <img src="{% static 'cat/angry_cat.jpg' %}" alt="Злой кот">
+    {% else %}
+        <img src="{% static 'cat/neutral_cat.jpg' %}" alt="Обычный кот">
+    {% endif %}
+    <p>Имя: {{ cat.name }}</p>
+    <p>Возраст: {{ cat.age }}</p>
+    <p>Уровень счастья: {{ cat.happiness }}</p>
+    <p>Уровень сытости: {{ cat.satiety }}</p>
+    <p>Спит: {{ cat.is_sleeping|yesno:"Да,Нет" }}</p>
+
+    <form method="POST" action="{% url 'cat_action' %}">
+        {% csrf_token %}
+        <label>Выберите действие:</label>
+        <select name="action">
+            <option value="play">Играть</option>
+            <option value="feed">Покормить</option>
+            <option value="sleep">Уложить спать</option>
+        </select>
+        <button type="submit">Подтвердить</button>
+    </form>
+</body>
+</html>
